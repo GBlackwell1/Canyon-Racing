@@ -37,22 +37,22 @@ public class PlayerController : MonoBehaviour
     private float mouseY = 0f;
 
     [Header("Camera")]
-    public float NormalFOV = 70;
-    public float BoostedFOV = 80;
-    private Camera Camera;
+    public float normalFOV = 70;
+    public float boostedFOV = 80;
+    private Camera playerCamera;
 
     [Header("UI")]
     public GameObject speed;
     private TextMeshProUGUI speedLable;
-    public GameObject CrossHair;
+    public GameObject crossHair;
     private RectTransform crossHairTransform;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Camera = Camera.main;
+        playerCamera = Camera.main;
         speedLable = speed.GetComponent<TextMeshProUGUI>();
-        crossHairTransform = CrossHair.GetComponent<RectTransform>();
+        crossHairTransform = crossHair.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -127,9 +127,9 @@ public class PlayerController : MonoBehaviour
             }
             additionalSpeed += boostAcceleration * Time.deltaTime;
             additionalSpeed = Mathf.Clamp(additionalSpeed, 0, maxBoostSpeed);
-            if (Camera.fieldOfView < BoostedFOV)
+            if (playerCamera.fieldOfView < boostedFOV)
             {
-                Camera.fieldOfView += Time.deltaTime * 40;
+                playerCamera.fieldOfView += Time.deltaTime * 40;
             }
         } 
         else
@@ -139,14 +139,14 @@ public class PlayerController : MonoBehaviour
                 isBoosting = false;
             }
             additionalSpeed = Mathf.Lerp(additionalSpeed, 0, Time.deltaTime);
-            if (Camera.fieldOfView > NormalFOV)
+            if (playerCamera.fieldOfView > normalFOV)
             {
-                Camera.fieldOfView -= Time.deltaTime *40;
+                playerCamera.fieldOfView -= Time.deltaTime *40;
             }
 
         }
 
-        Camera.fieldOfView = Mathf.Clamp(Camera.fieldOfView, NormalFOV, BoostedFOV);
+        playerCamera.fieldOfView = Mathf.Clamp(playerCamera.fieldOfView, normalFOV, boostedFOV);
 
         currentSpeed = Mathf.Clamp(currentSpeed, maxReverseSpeed, maxForwardSpeed + additionalSpeed);
 

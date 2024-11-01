@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 208784068381635553}
   m_Layer: 0
   m_Name: Spaceship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.65
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -216,6 +216,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49251c9cd5fe16140854681581f76048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollSpeed: 100
+  pitchSpeed: 100
+  thrustAcceleration: 20
+  maxForwardSpeed: 80
+  maxReverseSpeed: -20
+  rollAcceleration: 50
+  pitchAcceleration: 50
+  yawAcceleration: 50
+  maxRollSpeed: 200
+  maxPitchSpeed: 200
+  maxYawSpeed: 200
 --- !u!1 &8642891352952967045
 GameObject:
   m_ObjectHideFlags: 0

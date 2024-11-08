@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class CheckpointManager : MonoBehaviour
     public AudioClip checkpointPass;
     public GameObject checkpointLabel;
     private TextMeshProUGUI checkpointLabelTMP;
+    private float time = 0f;
     void Start()
     {
         finishLine = GameObject.Find("FinishLine");
@@ -37,6 +40,7 @@ public class CheckpointManager : MonoBehaviour
             checkpointLabelTMP.color = Color.green;
             checkpointLabelTMP.SetText("Get to the finish!");
         }
+        time += Time.deltaTime;
     }
 
     public void ColliderEvent(GameObject other)
@@ -50,7 +54,9 @@ public class CheckpointManager : MonoBehaviour
         }
         else if (other.CompareTag("Finish"))
         {
-            // TODO: Do something here, load gameover scene, level end, noise, etc.
+            GameManager.Instance.SaveLevelData(SceneManager.GetActiveScene().name, time);
+            Debug.Log(GameManager.Instance.GetLevelData().time);
+            GameManager.Instance.GoToLevel(0);
             Debug.Log("Finish reached");
             GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass);
         }

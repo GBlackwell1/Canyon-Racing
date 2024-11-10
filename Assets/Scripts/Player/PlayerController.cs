@@ -47,12 +47,19 @@ public class PlayerController : MonoBehaviour
     public GameObject crossHair;
     private RectTransform crossHairTransform;
 
+    [Header("Audio")]
+    public AudioClip thrustClip;
+    AudioSource audioSource;
+    AudioSource audioSourceShotEffect;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerCamera = Camera.main;
         speedLable = speed.GetComponent<TextMeshProUGUI>();
         crossHairTransform = crossHair.GetComponent<RectTransform>();
+        audioSource = GetComponent<AudioSource>();
+        audioSourceShotEffect = GetComponents<AudioSource>()[1];
     }
 
     // Update is called once per frame
@@ -106,6 +113,10 @@ public class PlayerController : MonoBehaviour
 
     void HandleThrust()
     {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
         if (Input.GetKey(KeyCode.W) && !isBoosting)
         {
             currentSpeed += thrustAcceleration * Time.deltaTime;
@@ -117,9 +128,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
+
             if (!isBoosting)
             {
                 isBoosting = true;
+                if (currentSpeed <= maxBoostSpeed + maxForwardSpeed
+                    && !audioSourceShotEffect.isPlaying)
+                    audioSourceShotEffect.Play();
+
             }
             else
             {

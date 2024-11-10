@@ -48,7 +48,7 @@ public class CheckpointManager : MonoBehaviour
         if (checkpoints.Contains(other))
         {
             other.SetActive(false);
-            GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass);
+            GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass, 4);
             checkpointsRemaining--;
             checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpointsRemaining + "/" + checkpoints.Count);
         }

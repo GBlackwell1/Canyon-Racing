@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public float normalFOV = 70;
     public float boostedFOV = 80;
     private Camera playerCamera;
+    private Quaternion initialRotation;
 
     [Header("UI")]
     public GameObject speed;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerCamera = Camera.main;
+        initialRotation = playerCamera.transform.rotation;
         speedLable = speed.GetComponent<TextMeshProUGUI>();
         crossHairTransform = crossHair.GetComponent<RectTransform>();
         audioSource = GetComponent<AudioSource>();
@@ -109,6 +111,9 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Rotate(currentPitchSpeed * Time.deltaTime, currentYawSpeed * Time.deltaTime, currentRollSpeed * Time.deltaTime);
+        // TODO: Confine this in some manner
+        RotateCamera();
+       
     }
 
     void HandleThrust()
@@ -145,19 +150,25 @@ public class PlayerController : MonoBehaviour
             additionalSpeed = Mathf.Clamp(additionalSpeed, 0, maxBoostSpeed);
             if (playerCamera.fieldOfView < boostedFOV)
             {
-                playerCamera.fieldOfView += Time.deltaTime * 40;
+                System.Random random = new System.Random();
+                StartCoroutine(ChangeFOV(true));
+                Vector3 camForce = new Vector3((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+                playerCamera.GetComponent<Rigidbody>().AddForce(camForce, ForceMode.Impulse);
+                
             }
         } 
         else
         {
+
             if (isBoosting)
             {
                 isBoosting = false;
+                
             }
             additionalSpeed = Mathf.Lerp(additionalSpeed, 0, Time.deltaTime);
             if (playerCamera.fieldOfView > normalFOV)
             {
-                playerCamera.fieldOfView -= Time.deltaTime *40;
+                StartCoroutine(ChangeFOV(false));
             }
 
         }
@@ -169,5 +180,35 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
         speedLable.text = "Speed: " + currentSpeed.ToString("F2");
+    }
+    // This is just awful and can't think of a way to constrain the camera rotation
+    private void RotateCamera()
+    {
+        float pitchOffset = Mathf.Clamp(currentPitchSpeed * Time.deltaTime * 0.1f, -10f, 10f);
+        float yawOffset = Mathf.Clamp(currentYawSpeed * Time.deltaTime * 0.1f, -10f, 10f);
+        float rollOffset = Mathf.Clamp(currentRollSpeed * Time.deltaTime * 0.1f, -10f, 10f);
+
+        if (playerCamera.transform.rotation.eulerAngles.x+pitchOffset <= initialRotation.eulerAngles.x - 10f || playerCamera.transform.rotation.eulerAngles.x+pitchOffset >= initialRotation.eulerAngles.x + 10f)
+            pitchOffset = 0;
+        if (playerCamera.transform.rotation.eulerAngles.y+yawOffset <= initialRotation.eulerAngles.y - 10f || playerCamera.transform.rotation.eulerAngles.y+yawOffset >= initialRotation.eulerAngles.y + 10f)
+            yawOffset = 0;
+        if (playerCamera.transform.rotation.eulerAngles.z <= initialRotation.eulerAngles.z+rollOffset - 10f || playerCamera.transform.rotation.eulerAngles.z+rollOffset >= initialRotation.eulerAngles.z + 10f)
+            rollOffset = 0;
+
+        playerCamera.transform.Rotate(pitchOffset, yawOffset, rollOffset);
+        //playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, targetRotation, Time.deltaTime);
+    }
+    // Adds slight delay to camera increasing and decreasing
+    IEnumerator ChangeFOV(bool increaseFOV)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (increaseFOV)
+        {
+            playerCamera.fieldOfView += Time.deltaTime * 20;
+        }
+        else
+        {
+            playerCamera.fieldOfView -= Time.deltaTime * 20;
+        }
     }
 }

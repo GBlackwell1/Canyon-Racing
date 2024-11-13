@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -30,10 +31,11 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GoToMainMenu()
     {
-        
+        MainMenu.SetActive(true);
+        LevelSelect.SetActive(false);
+        LevelComplete.SetActive(false);
     }
 
     public void GoToLevelSelect()
@@ -43,68 +45,18 @@ public class MainMenuManager : MonoBehaviour
         LevelComplete.SetActive(false);
     }
 
-    public void GoToMainMenu()
+    public void GoToLevel(int level)
     {
-        MainMenu.SetActive(true);
-        LevelSelect.SetActive(false);
-        LevelComplete.SetActive(false);
+        GameManager.Instance.GoToLevel(level);
     }
 
-    /*private IEnumerator AnimateMenus()
+    public void RestartLevel()
     {
-        RectTransform mainMenuRect = MainMenu.GetComponent<RectTransform>();
-        RectTransform levelSelectRect = LevelSelect.GetComponent<RectTransform>();
-
-        Vector2 mainMenuOriginalPosition = mainMenuRect.anchoredPosition;
-        Vector2 levelSelectOriginalPosition = levelSelectRect.anchoredPosition;
-
-        Vector2 mainMenuTargetPosition = new Vector2(-levelSelectRect.anchoredPosition.x, mainMenuRect.anchoredPosition.y);
-        Vector2 levelSelectTargetPosition = new Vector2(0, levelSelectRect.anchoredPosition.y);
-
-        float elapsedTime = 0f;
-
-        LevelSelect.SetActive(true);
-
-        while (elapsedTime < animationDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / animationDuration;
-
-            mainMenuRect.anchoredPosition = Vector2.Lerp(mainMenuOriginalPosition, mainMenuTargetPosition, t);
-            levelSelectRect.anchoredPosition = Vector2.Lerp(levelSelectOriginalPosition, levelSelectTargetPosition, t);
-
-            yield return null;
-        }
-
-        MainMenu.SetActive(false);
+        GameManager.Instance.RestartLevel();
     }
 
-    private IEnumerator AnimateMenus2()
+    public void GoToNextLevel()
     {
-        RectTransform mainMenuRect = MainMenu.GetComponent<RectTransform>();
-        RectTransform levelSelectRect = LevelSelect.GetComponent<RectTransform>();
-
-        Vector2 mainMenuOriginalPosition = mainMenuRect.anchoredPosition;
-        Vector2 levelSelectOriginalPosition = levelSelectRect.anchoredPosition;
-
-        Vector2 mainMenuTargetPosition = new Vector2(0, mainMenuRect.anchoredPosition.y);
-        Vector2 levelSelectTargetPosition = new Vector2(-mainMenuRect.anchoredPosition.x, levelSelectRect.anchoredPosition.y);
-
-        float elapsedTime = 0f;
-
-        MainMenu.SetActive(true);
-
-        while (elapsedTime < animationDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / animationDuration;
-
-            mainMenuRect.anchoredPosition = Vector2.Lerp(mainMenuOriginalPosition, mainMenuTargetPosition, t);
-            levelSelectRect.anchoredPosition = Vector2.Lerp(levelSelectOriginalPosition, levelSelectTargetPosition, t);
-
-            yield return null;
-        }
-
-        LevelSelect.SetActive(false);
-    }*/
+        GameManager.Instance.GoToNextLevel();
+    }
 }

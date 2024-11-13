@@ -71,6 +71,30 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(level);
     }
 
+    public void RestartLevel()
+    {
+        int levelIndex = int.Parse(levelData.level[^1].ToString());
+        GoToLevel(levelIndex);
+    }
+
+    public void GoToNextLevel()
+    {
+        int levelIndex = int.Parse(levelData.level[^1].ToString());
+        if (levelIndex < 8)
+        {
+            GoToLevel(levelIndex + 1);
+        }
+        else
+        {
+            GoToLevel(0);
+        }
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void Quit()
     {
         Application.Quit();

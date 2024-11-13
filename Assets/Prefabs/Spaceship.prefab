@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 6728540072414875875}
   - component: {fileID: 6588478529116755204}
   - component: {fileID: 8930627122782544795}
-  - component: {fileID: 1620419472985356242}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -374,29 +373,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1620419472985356242
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949111797808626112}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7399741894799535546
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,10 +476,12 @@ GameObject:
   - component: {fileID: 2900325924448646168}
   - component: {fileID: 3245667351783906635}
   - component: {fileID: 3673118145507050957}
-  - component: {fileID: 8243796705711145391}
   - component: {fileID: 6502650469281688449}
   - component: {fileID: 3824774812136495323}
   - component: {fileID: 6052018382031548893}
+  - component: {fileID: 4785059381742472251}
+  - component: {fileID: 513829240102151479}
+  - component: {fileID: 1595809596516087811}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Player
@@ -581,27 +559,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8243796705711145391
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8188364478003984857}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &6502650469281688449
 AudioSource:
   m_ObjectHideFlags: 0
@@ -826,6 +783,66 @@ MonoBehaviour:
   speed: {fileID: 0}
   crossHair: {fileID: 0}
   thrustClip: {fileID: 8300000, guid: e7bb4555b5d2484469f8e39c5ac36b0b, type: 3}
+--- !u!65 &4785059381742472251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188364478003984857}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.5099277, y: 0.40203115, z: 2.2885108}
+  m_Center: {x: 0.011443138, y: -0.07087569, z: 0.5216172}
+--- !u!114 &513829240102151479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188364478003984857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff3ce528a92d9340a3e389ba2d0bec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1595809596516087811
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188364478003984857}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8642891352952967045
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +854,6 @@ GameObject:
   - component: {fileID: 8660637856934838688}
   - component: {fileID: 6111962002864325303}
   - component: {fileID: 7171670216084410881}
-  - component: {fileID: 4542744463631717161}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -910,26 +926,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4542744463631717161
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8642891352952967045}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

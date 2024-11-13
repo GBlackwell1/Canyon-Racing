@@ -55,9 +55,7 @@ public class CheckpointManager : MonoBehaviour
         else if (other.CompareTag("Finish"))
         {
             GameManager.Instance.SaveLevelData(SceneManager.GetActiveScene().name, time);
-            Debug.Log(GameManager.Instance.GetLevelData().time);
             GameManager.Instance.GoToLevel(0);
-            Debug.Log("Finish reached");
             GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass);
         }
     }

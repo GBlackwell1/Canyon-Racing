@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerCamera = Camera.main;
-        initialRotation = playerCamera.transform.rotation;
+        initialRotation = playerCamera.transform.localRotation;
         speedLable = speed.GetComponent<TextMeshProUGUI>();
         crossHairTransform = crossHair.GetComponent<RectTransform>();
         audioSource = GetComponent<AudioSource>();
@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
     {
         HandleRotation();
         HandleThrust();
+    }
+
+    private void LateUpdate()
+    {
+        Quaternion targetRotation = new Quaternion(playerCamera.transform.localRotation.x + (mouseX * .08f), 
+                                                   playerCamera.transform.localRotation.y + (mouseY * .08f), 
+                                                   playerCamera.transform.localRotation.z + (mouseX * .02f) * (mouseY * .02f), playerCamera.transform.localRotation.w);
+        playerCamera.transform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, 0.005f);
     }
 
     void HandleRotation()
@@ -112,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         transform.Rotate(currentPitchSpeed * Time.deltaTime, currentYawSpeed * Time.deltaTime, currentRollSpeed * Time.deltaTime);
         // TODO: Confine this in some manner
-        RotateCamera();
+        
        
     }
 
@@ -180,23 +188,6 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
         speedLable.text = "Speed: " + currentSpeed.ToString("F2");
-    }
-    // This is just awful and can't think of a way to constrain the camera rotation
-    private void RotateCamera()
-    {
-        float pitchOffset = Mathf.Clamp(currentPitchSpeed * Time.deltaTime * 0.1f, -10f, 10f);
-        float yawOffset = Mathf.Clamp(currentYawSpeed * Time.deltaTime * 0.1f, -10f, 10f);
-        float rollOffset = Mathf.Clamp(currentRollSpeed * Time.deltaTime * 0.1f, -10f, 10f);
-
-        if (playerCamera.transform.rotation.eulerAngles.x+pitchOffset <= initialRotation.eulerAngles.x - 10f || playerCamera.transform.rotation.eulerAngles.x+pitchOffset >= initialRotation.eulerAngles.x + 10f)
-            pitchOffset = 0;
-        if (playerCamera.transform.rotation.eulerAngles.y+yawOffset <= initialRotation.eulerAngles.y - 10f || playerCamera.transform.rotation.eulerAngles.y+yawOffset >= initialRotation.eulerAngles.y + 10f)
-            yawOffset = 0;
-        if (playerCamera.transform.rotation.eulerAngles.z <= initialRotation.eulerAngles.z+rollOffset - 10f || playerCamera.transform.rotation.eulerAngles.z+rollOffset >= initialRotation.eulerAngles.z + 10f)
-            rollOffset = 0;
-
-        playerCamera.transform.Rotate(pitchOffset, yawOffset, rollOffset);
-        //playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, targetRotation, Time.deltaTime);
     }
     // Adds slight delay to camera increasing and decreasing
     IEnumerator ChangeFOV(bool increaseFOV)

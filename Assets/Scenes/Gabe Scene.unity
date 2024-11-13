@@ -2814,6 +2814,10 @@ PrefabInstance:
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 114455531}
+    - target: {fileID: 1905026454277882484, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2343658231295369232, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 95.6

@@ -321,15 +321,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1999999
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1999999
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1999999
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -386,6 +386,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 420ee4b41c67dc248af2cf38b09d5e47, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -453,6 +457,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2343658231295369232}
     m_Modifications:
+    - target: {fileID: 1595809596516087811, guid: 61b394d315ccf2c4da7c2278d7e0d6f2, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2900325924448646168, guid: 61b394d315ccf2c4da7c2278d7e0d6f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

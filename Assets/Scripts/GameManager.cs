@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public bool LevelComplete { get; private set; } = false;
     private LevelData levelData;
 
+    private AudioSource audioSource;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        audioSource = GameObject.Find("BackgroundMusic")?.GetComponent<AudioSource>();
+
     }
 
     // Start is called before the first frame update
@@ -98,6 +103,7 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        audioSource?.Pause();
     }
 
     public void SaveLevelData(string level, float time, int score = 0)

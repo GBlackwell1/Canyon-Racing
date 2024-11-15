@@ -73,9 +73,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Quaternion targetRotation = new Quaternion(playerCamera.transform.localRotation.x + (mouseX * .08f), 
-                                                   playerCamera.transform.localRotation.y + (mouseY * .08f), 
-                                                   playerCamera.transform.localRotation.z + (mouseX * .02f) * (mouseY * .02f), playerCamera.transform.localRotation.w);
+        var multiplier = currentSpeed / maxForwardSpeed;
+        Quaternion targetRotation = new Quaternion(playerCamera.transform.localRotation.y + (mouseY * .08f * multiplier),
+                                                   playerCamera.transform.localRotation.x + -(mouseX * .08f * multiplier),
+                                                   playerCamera.transform.localRotation.z + (mouseX * .02f) * (mouseY * .02f) * multiplier, playerCamera.transform.localRotation.w);
         playerCamera.transform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, 0.005f);
     }
 

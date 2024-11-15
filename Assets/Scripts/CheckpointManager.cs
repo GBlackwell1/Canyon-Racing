@@ -21,7 +21,7 @@ public class CheckpointManager : MonoBehaviour
     {
         finishLine = GameObject.Find("FinishLine");
         finishLine.SetActive(false);
-        foreach (Transform checkpoint in GetComponentsInChildren<Transform>())
+        foreach (Rigidbody checkpoint in GetComponentsInChildren<Rigidbody>())
         {
             if (checkpoint.GameObject().CompareTag("Checkpoint")) 
                 checkpoints.Add(checkpoint.GameObject());

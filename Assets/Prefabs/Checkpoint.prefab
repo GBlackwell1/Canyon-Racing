@@ -158,7 +158,6 @@ GameObject:
   - component: {fileID: 2353776208643728777}
   - component: {fileID: 4258808013052498925}
   - component: {fileID: 1340824332874525335}
-  - component: {fileID: 1893455109435376765}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Checkpoint
@@ -175,8 +174,8 @@ Transform:
   m_GameObject: {fileID: 5118921329504264718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.296, y: 0.094, z: 4.1}
-  m_LocalScale: {x: 0.26737964, y: 0.26737964, z: 9.006928}
+  m_LocalPosition: {x: 0.296, y: 0.094, z: -0.39}
+  m_LocalScale: {x: 1.0047325, y: 1.0047325, z: 33.845333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5918937310974146015}
@@ -231,24 +230,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1893455109435376765
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5118921329504264718}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

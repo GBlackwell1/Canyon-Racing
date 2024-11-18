@@ -9,7 +9,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject LevelSelect;
     public GameObject LevelComplete;
     public GameObject LevelName;
-    public GameObject Time;
+    public GameObject TotalTime;
+    public GameObject Camera;
     public float animationDuration = 1f;
 
     // Start is called before the first frame update
@@ -23,12 +24,19 @@ public class MainMenuManager : MonoBehaviour
             var levelStats = GameManager.Instance.GetLevelData();
             float time = (float)decimal.Round((decimal)levelStats.time, 2);
             LevelName.GetComponent<TMPro.TextMeshProUGUI>().SetText(levelStats.level);
-            Time.GetComponent<TMPro.TextMeshProUGUI>().SetText("Time: " + time);
+            TotalTime.GetComponent<TMPro.TextMeshProUGUI>().SetText("Time: " + time);
         }
         else
         {
             MainMenu.SetActive(true);
         }
+    }
+
+    private void Update()
+    {
+        var newTransform = Camera.transform.rotation.eulerAngles;
+        newTransform.y += Time.deltaTime;
+        Camera.transform.rotation = Quaternion.Euler(newTransform);
     }
 
     public void GoToMainMenu()

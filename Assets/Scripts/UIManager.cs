@@ -6,16 +6,16 @@ public class UIManager : MonoBehaviour
 {
 
     public float PauseDuration = 0.2f;
-    public GameObject pauseMenu;
-    public GameObject overlay;
-    private bool isPaused = false;
+    public GameObject PauseMenu;
+    public GameObject OverlayPanel;
+    public GameObject Countdown;
     private Vector2 originalPausePosition;
     private Vector2 offScreenPausePosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        var transform = pauseMenu.GetComponent<RectTransform>();
+        var transform = PauseMenu.GetComponent<RectTransform>();
         originalPausePosition = new Vector2(transform.anchoredPosition.x, transform.anchoredPosition.y);
         offScreenPausePosition = new Vector2(transform.anchoredPosition.x - transform.rect.width, transform.anchoredPosition.y);
         transform.anchoredPosition = offScreenPausePosition;
@@ -24,32 +24,46 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Time.timeScale = 0;
-            pauseMenu.SetActive(true);
-            overlay.SetActive(false);
-            StartCoroutine(OpenPauseMenu());
-            isPaused = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
 
-        if (isPaused && Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(ClosePauseMenu());
-        }
+    }
+
+    public void PauseGame()
+    {
+        Countdown.SetActive(false);
+        StopAllCoroutines();
+        StartCoroutine(OpenPauseMenu());
+    }
+
+    public void UnpauseGame()
+    {
+        StartCoroutine(ClosePauseMenu());
+    }
+
+    public void StartCountdown()
+    {
+        StartCoroutine(ExecuteCountdown());
+    }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.ReloadScene();
+    }
+
+    public void Quit()
+    {
+        GameManager.Instance.GoToLevel(0);
     }
 
     private IEnumerator OpenPauseMenu()
     {
-        var transform = pauseMenu.GetComponent<RectTransform>();
+        PauseMenu.SetActive(true);
+        OverlayPanel.SetActive(false);
+        var transform = PauseMenu.GetComponent<RectTransform>();
         float t = 0f;
         float multiplier = 1 / PauseDuration;
-        //Debug.Log($"Time: {t}, original position: {originalPausePosition}, offscreen position: {offScreenPausePosition}, position: {transform.anchoredPosition}");
         while (transform.anchoredPosition.x < originalPausePosition.x)
         {
             t += Time.unscaledDeltaTime;
-            Debug.Log($"Time: {t}, original position: {originalPausePosition}, offscreen position: {offScreenPausePosition}, position: {transform.anchoredPosition}");
             transform.anchoredPosition = Vector2.Lerp(offScreenPausePosition, originalPausePosition, t * multiplier);
             yield return null;
         }
@@ -57,22 +71,32 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ClosePauseMenu()
     {
-        var transform = pauseMenu.GetComponent<RectTransform>();
+        var transform = PauseMenu.GetComponent<RectTransform>();
         float t = 0f;
         float multiplier = 1 / PauseDuration;
-        //Debug.Log($"Time: {t}, original position: {originalPausePosition}, offscreen position: {offScreenPausePosition}, position: {transform.anchoredPosition}");
         while (transform.anchoredPosition.x > offScreenPausePosition.x)
         {
             t += Time.unscaledDeltaTime;
-            Debug.Log($"Time: {t}, original position: {originalPausePosition}, offscreen position: {offScreenPausePosition}, position: {transform.anchoredPosition}");
             transform.anchoredPosition = Vector2.Lerp(originalPausePosition, offScreenPausePosition, t * multiplier);
             yield return null;
         }
 
-        Time.timeScale = 1;
-        pauseMenu.SetActive(false);
-        isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        overlay.SetActive(true);
+        PauseMenu.SetActive(false);
+        OverlayPanel.SetActive(true);
+    }
+
+    private IEnumerator ExecuteCountdown()
+    {
+        Countdown.SetActive(true);
+        var text = Countdown.GetComponent<TMPro.TextMeshProUGUI>();
+        text.text = "3";
+        Countdown.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
+        text.text = "2";
+        yield return new WaitForSecondsRealtime(1);
+        text.text = "1";
+        yield return new WaitForSecondsRealtime(1);
+        Countdown.SetActive(false);
+        OverlayPanel.SetActive(true);
     }
 }

@@ -8,24 +8,22 @@ public class LevelManager : MonoBehaviour
     public GameObject player;
     private UIManager uiManager;
     private bool isPaused = false;
+    private Coroutine levelExitCoroutine;
+    private Coroutine resumeCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UI.GetComponent<UIManager>();
-        StartCoroutine(StartLevel());
+        resumeCoroutine = StartCoroutine(StartLevel());
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!isPaused && Input.GetKeyDown(KeyCode.Escape))
         {
-            StopAllCoroutines();
-            uiManager.PauseGame();
-            Time.timeScale = 0;
-            isPaused = true;
-            Cursor.lockState = CursorLockMode.None;
+            Pause();
         }
 
         if (isPaused && Input.GetKeyDown(KeyCode.R))
@@ -34,26 +32,54 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        if (resumeCoroutine != null)
+            StopCoroutine(resumeCoroutine);
+        uiManager.PauseGame();
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+    }
+
     public void Resume()
     {
         uiManager.UnpauseGame();
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        StartCoroutine(ResumeLevel());
+        resumeCoroutine = StartCoroutine(ResumeLevel());
+    }
+
+    public void ExitCourse()
+    {
+        levelExitCoroutine = StartCoroutine(ExitCourseCount());
+    }
+
+    public void EnterCourse()
+    {
+        uiManager.StopWarning();
+        StopCoroutine(levelExitCoroutine);
     }
 
     private IEnumerator StartLevel()
     {
-        uiManager.StartCountdown();
-        player.GetComponent<PlayerController>().enabled = false;
+        Time.timeScale = 0;
+        uiManager.StartCountdown(3);
         yield return new WaitForSecondsRealtime(3);
-        player.GetComponent<PlayerController>().enabled = true;
+        Time.timeScale = 1;
     }
 
     private IEnumerator ResumeLevel()
     {
-        uiManager.StartCountdown();
+        uiManager.StartCountdown(3);
         yield return new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
+    }
+
+    private IEnumerator ExitCourseCount()
+    {
+        uiManager.StartWarning(5);
+        yield return new WaitForSeconds(5);
+        GameManager.Instance.ReloadScene();
     }
 }

@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public GameObject Countdown;
     private Vector2 originalPausePosition;
     private Vector2 offScreenPausePosition;
+    private Coroutine countdownCoroutine;
+    private Coroutine warningCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +23,9 @@ public class UIManager : MonoBehaviour
         transform.anchoredPosition = offScreenPausePosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PauseGame()
     {
-        Countdown.SetActive(false);
-        StopAllCoroutines();
+        StopCoroutine(countdownCoroutine);
         StartCoroutine(OpenPauseMenu());
     }
 
@@ -39,9 +34,20 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ClosePauseMenu());
     }
 
-    public void StartCountdown()
+    public void StartCountdown(int length)
     {
-        StartCoroutine(ExecuteCountdown());
+        countdownCoroutine = StartCoroutine(ExecuteCountdown(length, false));
+    }
+
+    public void StartWarning(int length)
+    {
+        warningCoroutine = StartCoroutine(ExecuteCountdown(length, true));
+    }
+
+    public void StopWarning()
+    {
+        StopCoroutine(warningCoroutine);
+        Countdown.SetActive(false);
     }
 
     public void RestartLevel()
@@ -58,6 +64,7 @@ public class UIManager : MonoBehaviour
     {
         PauseMenu.SetActive(true);
         OverlayPanel.SetActive(false);
+        Countdown.SetActive(false);
         var transform = PauseMenu.GetComponent<RectTransform>();
         float t = 0f;
         float multiplier = 1 / PauseDuration;
@@ -85,17 +92,17 @@ public class UIManager : MonoBehaviour
         OverlayPanel.SetActive(true);
     }
 
-    private IEnumerator ExecuteCountdown()
+    private IEnumerator ExecuteCountdown(int length, bool warning)
     {
         Countdown.SetActive(true);
         var text = Countdown.GetComponent<TMPro.TextMeshProUGUI>();
-        text.text = "3";
-        Countdown.SetActive(true);
-        yield return new WaitForSecondsRealtime(1);
-        text.text = "2";
-        yield return new WaitForSecondsRealtime(1);
-        text.text = "1";
-        yield return new WaitForSecondsRealtime(1);
+        for (int i = length; i > 0; i--)
+        {
+            Countdown.SetActive(true);
+            string result = warning ? $"Turn Back: {i}" : i.ToString();
+            text.text = result;
+            yield return warning ? new WaitForSeconds(1) : new WaitForSecondsRealtime(1);
+        }
         Countdown.SetActive(false);
         OverlayPanel.SetActive(true);
     }

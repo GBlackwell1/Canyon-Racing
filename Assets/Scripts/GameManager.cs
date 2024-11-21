@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public bool InitialLoad { get; private set; } = true;
     public bool LevelComplete { get; private set; } = false;
     private LevelData levelData;
 
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToLevel(int level)
     {
-        Debug.Log("Loading level " + level);
+        InitialLoad = false;
         switch (level)
         {
             case 1:
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
     public void GoToNextLevel()
     {
         int levelIndex = int.Parse(levelData.level[^1].ToString());
-        if (levelIndex < 8)
+        if (levelIndex < 4)
         {
             GoToLevel(levelIndex + 1);
         }
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
 
     public LevelData GetLevelData()
     {
+        LevelComplete = false;
         return levelData;
     }
 }

@@ -1537,10 +1537,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1867544200371134800, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1571,6 +1567,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
@@ -1625,10 +1633,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1513560238}
-    - target: {fileID: 6936258850239896428, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

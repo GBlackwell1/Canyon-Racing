@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 487ff562e12097245836b525ebd187d8
+guid: ffe149bb4f774b54b90a47542b79508e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Metal
+    second: {fileID: 2100000, guid: 4038eb13461d53746ada9462861a0b96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 6ebc87134fc29b04c9ac009699fccb1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Thrusters
+    second: {fileID: 2100000, guid: 5e52d926c5fa17845bcda3930af693fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 3bdebadb9216ba14d9d811ca17958dc9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

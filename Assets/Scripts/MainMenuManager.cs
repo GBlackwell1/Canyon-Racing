@@ -5,6 +5,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public float HomeAnimationDuration = 0.5f;
     public float LevelEndAnimationDuration = 0.5f;
+    public AudioClip MainMenuRise;
     private GameObject Home;
     private GameObject LevelSelect;
     private GameObject LevelEnd;
@@ -60,7 +61,17 @@ public class MainMenuManager : MonoBehaviour
             Home.SetActive(true);
         }
     }
-
+    private void Awake()
+    {
+        GetComponent<AudioSource>().PlayOneShot(MainMenuRise);
+    }
+    public void Update()
+    {
+        if (!GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().Play();
+        }
+    }
     public void GoToMainMenu()
     {
         Home.SetActive(true);

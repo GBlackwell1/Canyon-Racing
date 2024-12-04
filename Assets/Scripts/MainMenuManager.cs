@@ -37,9 +37,23 @@ public class MainMenuManager : MonoBehaviour
             // Set the data
             var levelStats = GameManager.Instance.GetLevelData();
             float time = (float)decimal.Round((decimal)levelStats.time, 2);
+            float bestTime = float.MaxValue;
+            bool newBest = false;
+            if (PlayerPrefs.HasKey($"{levelStats.level} time"))
+            {
+                bestTime = PlayerPrefs.GetFloat($"{levelStats.level} time");
+            }
+
+            if (time < bestTime)
+            {
+                newBest = true;
+                PlayerPrefs.SetFloat($"{levelStats.level} time", time);
+                PlayerPrefs.Save();
+            }
+
             var textBoxes = LevelEnd.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
             textBoxes[0].SetText(levelStats.level);
-            textBoxes[1].SetText("Time: " + time);
+            textBoxes[1].SetText("Time: " + time + (newBest ? " (New Best!)" : $" (Best: {bestTime})"));
 
             StartCoroutine(MenuAnimation(LevelEnd, 0.5f, LevelEndAnimationDuration));
         }

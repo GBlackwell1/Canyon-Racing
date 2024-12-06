@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject UI;
     public GameObject player;
+    private GameObject brokenShip;
     private UIManager uiManager;
     private bool isPaused = false;
     private Coroutine levelExitCoroutine;
@@ -17,6 +18,9 @@ public class LevelManager : MonoBehaviour
         uiManager = UI.GetComponent<UIManager>();
         resumeCoroutine = StartCoroutine(StartLevel());
         Cursor.lockState = CursorLockMode.Locked;
+        player = GameObject.Find("Spaceship");
+        brokenShip = GameObject.Find("Broken Ship");
+        brokenShip.SetActive(false);
     }
 
     void Update()
@@ -61,6 +65,11 @@ public class LevelManager : MonoBehaviour
         StopCoroutine(levelExitCoroutine);
     }
 
+    public void ShipDestroyed()
+    {
+        StartCoroutine(BreakShip());
+    }
+
     private IEnumerator StartLevel()
     {
         Time.timeScale = 0;
@@ -80,6 +89,22 @@ public class LevelManager : MonoBehaviour
     {
         uiManager.StartWarning(5);
         yield return new WaitForSeconds(5);
+        StartCoroutine(BreakShip());
+    }
+
+    private IEnumerator BreakShip()
+    {
+        brokenShip.transform.position = player.transform.position;
+        brokenShip.transform.rotation = player.transform.rotation;
+        float speed = player.GetComponent<PlayerController>().currentSpeed;
+        player.SetActive(false);
+        UI.SetActive(false);
+        brokenShip.SetActive(true);
+        foreach (Transform child in brokenShip.transform)
+        {
+            child.gameObject.GetComponent<Rigidbody>().AddForce((Random.insideUnitSphere * 1000) + brokenShip.transform.forward * speed * 35);
+        }
+        yield return new WaitForSeconds(3);
         GameManager.Instance.ReloadScene();
     }
 }

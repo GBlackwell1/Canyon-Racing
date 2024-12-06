@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float maxForwardSpeed = 80f;
     public float maxReverseSpeed = -20f;
     public float boostDampener = 0.5f; // Reduction in manuverability when boosting
-    private float currentSpeed = 0f;
+    public float currentSpeed { get; private set; } = 0f;
     private float additionalSpeed = 0f;
     bool isBoosting = true;
 

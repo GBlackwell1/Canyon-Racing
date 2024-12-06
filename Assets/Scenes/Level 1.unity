@@ -183,7 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0900a8ecd6d074428e0f05dc6c73bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointsRemaining: 0
   checkpointPass: {fileID: 0}
   checkpointLabel: {fileID: 1991194846287379081}
 --- !u!1 &171846260
@@ -945,6 +944,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2784fda2305b8842bf7ff5b54e1df07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1231969758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2897524879572850208, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+  m_PrefabInstance: {fileID: 1638509991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1231969762
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231969758}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8691780276856062721, guid: ffe149bb4f774b54b90a47542b79508e, type: 3}
 --- !u!1001 &1383081355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1077,6 +1103,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 590004983901678533, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_Size.x
+      value: 2.8538265
+      objectReference: {fileID: 0}
+    - target: {fileID: 590004983901678533, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_Size.z
+      value: 2.5020168
+      objectReference: {fileID: 0}
+    - target: {fileID: 590004983901678533, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_Center.x
+      value: 0.013619423
+      objectReference: {fileID: 0}
+    - target: {fileID: 590004983901678533, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_Center.z
+      value: 0.81134665
+      objectReference: {fileID: 0}
     - target: {fileID: 1849566474144683555, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
       propertyPath: speed
       value: 
@@ -1085,6 +1127,10 @@ PrefabInstance:
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 7298134470018868767}
+    - target: {fileID: 2228556810390421812, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2343658231295369232, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 94.1
@@ -1125,14 +1171,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2897524879572850208, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 9102073425959030902, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
       propertyPath: m_Name
       value: SpaceshipContainer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 590004983901678533, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2897524879572850208, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231969762}
   m_SourcePrefab: {fileID: 100100000, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
 --- !u!1001 &1815100840
 PrefabInstance:

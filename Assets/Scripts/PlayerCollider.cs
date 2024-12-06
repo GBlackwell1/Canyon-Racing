@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
+    private LevelManager levelManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject levelManagerObject = GameObject.Find("LevelManager");
+        levelManager = levelManagerObject.GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -19,7 +21,7 @@ public class PlayerCollider : MonoBehaviour
     {
         if (collision.gameObject.tag != "Checkpoint" && collision.gameObject.tag != "Finish")
         {
-            GameManager.Instance.ReloadScene();
+            levelManager.ShipDestroyed();
         }
     }
 }

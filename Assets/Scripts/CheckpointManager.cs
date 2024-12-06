@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,11 +12,12 @@ public class CheckpointManager : MonoBehaviour
     
     private GameObject finishLine;
     private List<GameObject> checkpoints = new List<GameObject>();
-    [SerializeField] private int checkpointsRemaining;
+    private int checkpointCount = 0;
     public AudioClip checkpointPass;
     public GameObject checkpointLabel;
     private TextMeshProUGUI checkpointLabelTMP;
     private float time = 0f;
+    private bool finishActive = false;
     void Start()
     {
         finishLine = GameObject.Find("FinishLine");
@@ -25,15 +27,20 @@ public class CheckpointManager : MonoBehaviour
             if (checkpoint.GameObject().CompareTag("Checkpoint")) 
                 checkpoints.Add(checkpoint.GameObject());
         }
-        checkpointsRemaining = checkpoints.Count;
+        checkpointCount = checkpoints.Count;
         checkpointLabelTMP = checkpointLabel.GetComponent<TextMeshProUGUI>();
-        checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpointsRemaining + "/" + checkpoints.Count);
+        checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpoints.Count + "/" + checkpointCount);
+        foreach (GameObject checkpoint in checkpoints)
+        {
+            checkpoint.SetActive(false);
+        }
+        checkpoints[0].SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (checkpointsRemaining <= 0)
+        if (finishActive && !finishLine.activeInHierarchy)
         {
             finishLine.SetActive(true);
             checkpointLabelTMP.color = Color.green;
@@ -47,9 +54,14 @@ public class CheckpointManager : MonoBehaviour
         if (checkpoints.Contains(other))
         {
             other.SetActive(false);
+            checkpoints.Remove(other);
+            if (checkpoints.Count > 0)
+                checkpoints[0].SetActive(true);
+            else
+                finishActive = true;
             GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass, 4);
-            checkpointsRemaining--;
-            checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpointsRemaining + "/" + checkpoints.Count);
+            checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpoints.Count + "/" + checkpointCount);
+
         }
         else if (other.CompareTag("Finish"))
         {

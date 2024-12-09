@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
 
     public void StopWarning()
     {
-        StopCoroutine(warningCoroutine);
+        //StopCoroutine(warningCoroutine);
         Countdown.SetActive(false);
     }
 

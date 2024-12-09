@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetType() == typeof(BoxCollider))
             checkpointManager.ColliderEvent(gameObject);
     }
 }

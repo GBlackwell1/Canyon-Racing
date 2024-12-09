@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     private GameObject brokenShip;
     private UIManager uiManager;
     private bool isPaused = false;
+    private bool isRunning = false;
     private Coroutine levelExitCoroutine;
     private Coroutine resumeCoroutine;
 
@@ -62,7 +63,8 @@ public class LevelManager : MonoBehaviour
     public void EnterCourse()
     {
         uiManager.StopWarning();
-        StopCoroutine(levelExitCoroutine);
+        if (isRunning)
+            StopCoroutine(levelExitCoroutine);
     }
 
     public void ShipDestroyed()
@@ -87,6 +89,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ExitCourseCount()
     {
+        isRunning = true;
         uiManager.StartWarning(5);
         yield return new WaitForSeconds(5);
         StartCoroutine(BreakShip());

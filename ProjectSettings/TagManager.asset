@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Checkpoint
   - Animated
+  - Asteroid
   layers:
   - Default
   - TransparentFX

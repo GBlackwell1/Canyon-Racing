@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 2650693696094586944}
   - component: {fileID: 4937728559936632936}
   m_Layer: 5
-  m_Name: Back (1)
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,9 +1330,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: GoToRules
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1463,9 +1463,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: CloseGameplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 4206555226700282987}
   - component: {fileID: 8674699075439255005}
   m_Layer: 5
-  m_Name: Back (1)
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1596,9 +1596,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: GoToControl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3415,9 +3415,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: GoToControl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4367,6 +4367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5686261479927129047}
+  - component: {fileID: 3780700612971038655}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -4384,7 +4385,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2108498, y: 2.2108498, z: 2.2108498}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2708204302356456329}
@@ -4392,6 +4393,18 @@ Transform:
   - {fileID: 2822518262170056691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3780700612971038655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228357682843404093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a5868b5c1c1424fb64eba0007ced4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7959708338530395163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4513,9 +4526,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: GoToControl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5076,7 +5089,7 @@ GameObject:
   - component: {fileID: 7117438694742691398}
   - component: {fileID: 3301619906666806768}
   m_Layer: 5
-  m_Name: Back (1)
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5184,9 +5197,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+      - m_Target: {fileID: 3780700612971038655}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: CloseGameplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

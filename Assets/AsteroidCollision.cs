@@ -5,28 +5,39 @@ using UnityEngine;
 public class AsteroidCollision : MonoBehaviour
 {
     private LevelManager levelManager;
-    private int asteroidsWithin = 0;
+    private bool enter = true;
+    private bool isRunning = false;
     // Start is called before the first frame update
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
+
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Asteroid")
         {
-            asteroidsWithin++;
-            levelManager.EnterCourse();
+            enter = true;
+            StopAllCoroutines();
+            if (isRunning)
+                levelManager.EnterCourse();
+            isRunning = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Asteroid")
         {
-            asteroidsWithin--;
-            if (asteroidsWithin <= 0)
-                levelManager.ExitCourse();
+            enter = false;
+            if (!isRunning) 
+                StartCoroutine(VerifyExit());
         }
+    }
+    IEnumerator VerifyExit()
+    {
+        isRunning = true;
+        yield return new WaitForSeconds(1f);
+        if (!enter) levelManager.ExitCourse();
     }
 }

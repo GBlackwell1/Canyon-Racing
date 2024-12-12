@@ -30701,6 +30701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1606487525725044692, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1850241629301995896, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1
@@ -30829,6 +30833,11 @@ PrefabInstance:
 --- !u!1 &925212881 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4610920202596730206, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+  m_PrefabInstance: {fileID: 925212880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &925212882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 920472502373307010, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
   m_PrefabInstance: {fileID: 925212880}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &932939711 stripped
@@ -52653,8 +52662,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0900a8ecd6d074428e0f05dc6c73bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckpointArrow: {fileID: 925212882}
   checkpointPass: {fileID: 8300000, guid: df84ce25cc3e4334dbef4a4e0ea38408, type: 3}
   checkpointLabel: {fileID: 925212881}
+  Spaceship: {fileID: 522826915}
 --- !u!4 &1548850671
 Transform:
   m_ObjectHideFlags: 0

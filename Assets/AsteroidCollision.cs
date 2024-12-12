@@ -5,8 +5,7 @@ using UnityEngine;
 public class AsteroidCollision : MonoBehaviour
 {
     private LevelManager levelManager;
-    private bool enter = true;
-    private bool isRunning = false;
+    private int asteroidsWithin = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,26 +17,19 @@ public class AsteroidCollision : MonoBehaviour
     {
         if (other.tag == "Asteroid")
         {
-            enter = true;
-            StopAllCoroutines();
-            if (isRunning)
-                levelManager.EnterCourse();
-            isRunning = false;
+            asteroidsWithin++;
+            levelManager.EnterCourse();
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Asteroid")
         {
-            enter = false;
-            if (!isRunning) 
-                StartCoroutine(VerifyExit());
+            asteroidsWithin--;
+            if (asteroidsWithin <= 0)
+            {
+                levelManager.ExitCourse();
+            }
         }
-    }
-    IEnumerator VerifyExit()
-    {
-        isRunning = true;
-        yield return new WaitForSeconds(1f);
-        if (!enter) levelManager.ExitCourse();
     }
 }

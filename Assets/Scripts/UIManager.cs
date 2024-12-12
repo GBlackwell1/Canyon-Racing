@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -57,7 +58,8 @@ public class UIManager : MonoBehaviour
 
     public void StopWarning()
     {
-        //StopCoroutine(warningCoroutine);
+        if (warningCoroutine != null)
+            StopCoroutine(warningCoroutine);
         Countdown.SetActive(false);
     }
 
@@ -120,6 +122,8 @@ public class UIManager : MonoBehaviour
             text.text = result;
             yield return warning ? new WaitForSeconds(1) : new WaitForSecondsRealtime(1);
         }
+        if (SceneManager.GetActiveScene().name == "Level 4" && !warning)
+            GameObject.Find("Info")?.SetActive(false);
         Countdown.SetActive(false);
         OverlayPanel.SetActive(true);
     }

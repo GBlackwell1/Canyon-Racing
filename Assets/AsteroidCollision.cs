@@ -11,7 +11,6 @@ public class AsteroidCollision : MonoBehaviour
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
-
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
@@ -27,9 +26,7 @@ public class AsteroidCollision : MonoBehaviour
         {
             asteroidsWithin--;
             if (asteroidsWithin <= 0)
-            {
                 levelManager.ExitCourse();
-            }
         }
     }
 }

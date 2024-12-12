@@ -6,7 +6,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-// using CodeMonkey.Utils;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -14,16 +13,8 @@ public class CheckpointManager : MonoBehaviour
     private GameObject finishLine;
     private List<GameObject> checkpoints = new List<GameObject>();
     private int checkpointCount = 0;
-
-    private Vector3 targetPosition;
-    private Vector3 checkpointPosition;
-    private RectTransform pointerRectTransform;
-
-    public GameObject CheckpointArrow;
     public AudioClip checkpointPass;
     public GameObject checkpointLabel;
-    
-    public GameObject Spaceship;
     private TextMeshProUGUI checkpointLabelTMP;
     private float time = 0f;
     private bool finishActive = false;
@@ -44,30 +35,11 @@ public class CheckpointManager : MonoBehaviour
             checkpoint.SetActive(false);
         }
         checkpoints[0].SetActive(true);
-        CheckpointArrow.SetActive(true);
-        pointerRectTransform = CheckpointArrow.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (checkpoints.Count > 0){
-            targetPosition = checkpoints[0].transform.position;
-
-            Vector3 toPosition = Camera.main.WorldToScreenPoint(targetPosition);
-            toPosition.z = 0f;
-
-            Vector3 fromPosition = Camera.main.WorldToScreenPoint(Spaceship.transform.position);
-            fromPosition.z = 0f;
-
-            Vector3 dir = (toPosition - fromPosition).normalized;
-            dir = dir.normalized;
-            float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            float angle =  n < 0 ? n + 360 : n;
-            
-            pointerRectTransform.localEulerAngles = new Vector3(0,0,angle);
-        }
-
         if (finishActive && !finishLine.activeInHierarchy)
         {
             finishLine.SetActive(true);
@@ -83,15 +55,13 @@ public class CheckpointManager : MonoBehaviour
         {
             other.SetActive(false);
             checkpoints.Remove(other);
-            if (checkpoints.Count > 0){
+            if (checkpoints.Count > 0)
                 checkpoints[0].SetActive(true);
-            }
-            else{
+            else
                 finishActive = true;
-                CheckpointArrow.SetActive(false);
-            }
             GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass, 4);
             checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpoints.Count + "/" + checkpointCount);
+
         }
         else if (other.CompareTag("Finish"))
         {

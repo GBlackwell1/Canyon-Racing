@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject OverlayPanel;
     public GameObject Countdown;
 
+    private GameObject CheckpointArrow;
+
     private GameObject GameplayMenu;
 
     private GameObject Gameplay;
@@ -24,6 +26,7 @@ public class UIManager : MonoBehaviour
 
         GameplayMenu = transform.Find("Gameplay").gameObject;
         Gameplay = GameplayMenu.transform.Find("control1").gameObject;
+        CheckpointArrow = transform.Find("CheckpointArrow").gameObject;
 
         var transformRect = PauseMenu.GetComponent<RectTransform>();
         originalPausePosition = new Vector2(transformRect.anchoredPosition.x, transformRect.anchoredPosition.y);
@@ -77,6 +80,7 @@ public class UIManager : MonoBehaviour
         PauseMenu.SetActive(true);
         OverlayPanel.SetActive(false);
         Countdown.SetActive(false);
+        CheckpointArrow.SetActive(false);
         var transform = PauseMenu.GetComponent<RectTransform>();
         float t = 0f;
         float multiplier = 1 / PauseDuration;
@@ -102,6 +106,7 @@ public class UIManager : MonoBehaviour
 
         PauseMenu.SetActive(false);
         OverlayPanel.SetActive(true);
+        CheckpointArrow.SetActive(true);
     }
 
     private IEnumerator ExecuteCountdown(int length, bool warning)

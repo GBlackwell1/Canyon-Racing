@@ -58,18 +58,6 @@ public class GameManager : MonoBehaviour
             case 4:
                 SceneManager.LoadScene("Level 4");
                 break;
-            case 5:
-                SceneManager.LoadScene("Level 5");
-                break;
-            case 6:
-                SceneManager.LoadScene("Level 6");
-                break;
-            case 7:
-                SceneManager.LoadScene("Level 7");
-                break;
-            case 8:
-                SceneManager.LoadScene("Level 8");
-                break;
             default:
                 SceneManager.LoadScene("Main Menu");
                 break;

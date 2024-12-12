@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        uiManager = UI.GetComponent<UIManager>();
+        uiManager = UI.GetComponent<UIManager>();   
         resumeCoroutine = StartCoroutine(StartLevel());
         Cursor.lockState = CursorLockMode.Locked;
         player = GameObject.Find("Spaceship");
@@ -101,7 +101,7 @@ public class LevelManager : MonoBehaviour
         brokenShip.transform.rotation = player.transform.rotation;
         float speed = player.GetComponent<PlayerController>().currentSpeed;
         player.SetActive(false);
-        UI.SetActive(false);
+        // UI.SetActive(false);
         brokenShip.SetActive(true);
         foreach (Transform child in brokenShip.transform)
         {

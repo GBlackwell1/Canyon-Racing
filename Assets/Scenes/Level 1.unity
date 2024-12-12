@@ -635,6 +635,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1380642042927246070, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2118440821}
+    - target: {fileID: 1380642042927246070, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 1606487525725044692, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_Name
       value: UI
@@ -654,6 +662,10 @@ PrefabInstance:
     - target: {fileID: 1951044780837940482, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784247641773942418, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5023102091978416946, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
       propertyPath: m_Pivot.x
@@ -1682,6 +1694,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3187294659244430536, guid: c2f71fe2d72c62b4d9ac0a9efffff856, type: 3}
   m_PrefabInstance: {fileID: 8958551294513395852}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2118440821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2321348557205033782, guid: c2f71fe2d72c62b4d9ac0a9efffff856, type: 3}
+  m_PrefabInstance: {fileID: 8958551294513395852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2784fda2305b8842bf7ff5b54e1df07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8958551294513395852
 PrefabInstance:
   m_ObjectHideFlags: 0

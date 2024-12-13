@@ -19,7 +19,7 @@ public class HoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (PlayerPrefs.HasKey($"{level} time"))
         {
             float speed = PlayerPrefs.GetFloat($"{level} time");
-            TimeLabel.text = speed.ToString("F2") + "secs";
+            TimeLabel.text = speed.ToString("F2");
         }
         else{
             TimeLabel.text = "-:--";

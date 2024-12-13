@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
-        speedLable.text = "Speed: " + currentSpeed.ToString("F2");
+        speedLable.text = "Speed (MPH): " + currentSpeed.ToString("F2");
     }
 
     IEnumerator ChangeFOV(bool increaseFOV)

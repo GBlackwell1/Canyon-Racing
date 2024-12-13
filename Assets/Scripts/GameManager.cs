@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         LevelComplete = false;
         return levelData;
     }
+    
 }
 
 public struct LevelData

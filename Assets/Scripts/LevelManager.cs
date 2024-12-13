@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject UI;
     public GameObject player;
+    public AudioClip DestroyClip;
     private GameObject brokenShip;
     private UIManager uiManager;
     private bool isPaused = false;
@@ -13,6 +14,7 @@ public class LevelManager : MonoBehaviour
     private bool preventInput = false;
     private Coroutine levelExitCoroutine;
     private Coroutine resumeCoroutine;
+
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +102,7 @@ public class LevelManager : MonoBehaviour
         player.SetActive(false);
         UI.SetActive(false);
         brokenShip.SetActive(true);
+        AudioSource.PlayClipAtPoint(DestroyClip, brokenShip.transform.position);
         foreach (Transform child in brokenShip.transform)
         {
             child.gameObject.GetComponent<Rigidbody>().AddForce((Random.insideUnitSphere * 1000) + brokenShip.transform.forward * speed * 35);

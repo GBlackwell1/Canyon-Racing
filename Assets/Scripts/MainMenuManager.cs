@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
     private GameObject Gameplay;
     private GameObject LevelSelect;
     private GameObject LevelEnd;
+    private GameObject About;
     private Vector2 originalPanelPosition;
     private Vector2 offScreenPanelPosition;
 
@@ -21,6 +22,7 @@ public class MainMenuManager : MonoBehaviour
         Gameplay = transform.Find("Gameplay").gameObject;
         LevelSelect = transform.Find("Level Select").gameObject;
         LevelEnd = transform.Find("Level End").gameObject;
+        About = transform.Find("About").gameObject;
 
         if (GameManager.Instance.LevelComplete)
         {
@@ -94,6 +96,7 @@ public class MainMenuManager : MonoBehaviour
         Gameplay.SetActive(false);
         LevelSelect.SetActive(false);
         LevelEnd.SetActive(false);
+        About.SetActive(false);
     }
 
     public void GoToGameplay(){
@@ -106,6 +109,7 @@ public class MainMenuManager : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         Gameplay.transform.Find("Gameplay - Controls 1").gameObject.SetActive(true);
+        About.SetActive(false);
     }
 
     public void GoToLevelSelect()
@@ -114,6 +118,15 @@ public class MainMenuManager : MonoBehaviour
         Gameplay.SetActive(false);
         LevelSelect.SetActive(true);
         LevelEnd.SetActive(false);
+        About.SetActive(false);
+    }
+
+    public void GoToAbout(){
+        Home.SetActive(false);
+        Gameplay.SetActive(false);
+        LevelSelect.SetActive(false);
+        LevelEnd.SetActive(false);
+        About.SetActive(true);
     }
 
     public void GoToLevel(int level)

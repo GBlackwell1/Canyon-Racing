@@ -22,7 +22,22 @@ public class Boost : MonoBehaviour
         {
             // Increase the player's speed
             other.GetComponent<PlayerController>().ApplyExternalBoost(boostDuration);
-            gameObject.SetActive(false);
+            var animator = gameObject.GetComponent<Animator>();
+            animator.SetBool("Used", true);
+            StartCoroutine(DestroyBoost());
         }
+    }
+
+    private IEnumerator DestroyBoost()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            {
+                break;
+            }
+        }
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

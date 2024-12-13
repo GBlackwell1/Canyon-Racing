@@ -16,8 +16,11 @@ public class Checkpoint : MonoBehaviour
         if (other.CompareTag("Player") && other.GetType() == typeof(BoxCollider))
         {
             checkpointManager.ColliderEvent(gameObject);
-            var animator = transform.Find("Model").gameObject.GetComponent<Animator>();
-            animator.SetBool("Completed", true);
+            if (!gameObject.CompareTag("Finish"))
+            {
+                var animator = transform.Find("Model").gameObject.GetComponent<Animator>();
+                animator.SetBool("Completed", true);
+            }
         }  
     }
 }

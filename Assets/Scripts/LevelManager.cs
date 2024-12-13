@@ -10,13 +10,14 @@ public class LevelManager : MonoBehaviour
     private UIManager uiManager;
     private bool isPaused = false;
     private bool isRunning = false;
+    private bool preventInput = false;
     private Coroutine levelExitCoroutine;
     private Coroutine resumeCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        uiManager = UI.GetComponent<UIManager>();
+        uiManager = UI.GetComponent<UIManager>();   
         resumeCoroutine = StartCoroutine(StartLevel());
         Cursor.lockState = CursorLockMode.Locked;
         player = GameObject.Find("Spaceship");
@@ -26,14 +27,9 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (!isPaused && Input.GetKeyDown(KeyCode.Escape))
+        if (!isPaused && Input.GetKeyDown(KeyCode.Escape) && !preventInput)
         {
             Pause();
-        }
-
-        if (isPaused && Input.GetKeyDown(KeyCode.R))
-        {
-            Resume();
         }
     }
 
@@ -97,6 +93,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator BreakShip()
     {
+        preventInput = true;
         brokenShip.transform.position = player.transform.position;
         brokenShip.transform.rotation = player.transform.rotation;
         float speed = player.GetComponent<PlayerController>().currentSpeed;

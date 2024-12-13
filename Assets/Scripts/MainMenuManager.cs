@@ -7,8 +7,6 @@ public class MainMenuManager : MonoBehaviour
     public float LevelEndAnimationDuration = 0.5f;
     public AudioClip MainMenuRise;
     private GameObject Home;
-
-    private GameObject GameplayMenu;
     private GameObject Gameplay;
     private GameObject LevelSelect;
     private GameObject LevelEnd;
@@ -20,8 +18,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Home = transform.Find("Home").gameObject;
-        GameplayMenu = transform.Find("Gameplay").gameObject;
-        Gameplay = GameplayMenu.transform.Find("control1").gameObject;
+        Gameplay = transform.Find("Gameplay").gameObject;
         LevelSelect = transform.Find("Level Select").gameObject;
         LevelEnd = transform.Find("Level End").gameObject;
 
@@ -104,6 +101,11 @@ public class MainMenuManager : MonoBehaviour
         Gameplay.SetActive(true);
         LevelSelect.SetActive(false);
         LevelEnd.SetActive(false);
+        foreach (Transform child in Gameplay.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        Gameplay.transform.Find("Gameplay - Controls 1").gameObject.SetActive(true);
     }
 
     public void GoToLevelSelect()

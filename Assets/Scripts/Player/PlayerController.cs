@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     public float maxReverseSpeed = -20f;
     public float boostDampener = 0.5f; // Reduction in manuverability when boosting
     public float currentSpeed { get; private set; } = 0f;
+    private float baseSpeed = 0f;
     private float additionalSpeed = 0f;
     bool isBoosting = true;
+    bool externalBoost = false;
 
     [Header("Roll")]
     public float rollAcceleration = 400f;
@@ -133,14 +135,17 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W) && !isBoosting)
         {
-            currentSpeed += thrustAcceleration * Time.deltaTime;
+            if (baseSpeed < maxForwardSpeed)
+                baseSpeed += thrustAcceleration * Time.deltaTime;
+            else
+                baseSpeed = maxForwardSpeed;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            currentSpeed -= thrustAcceleration * Time.deltaTime;
+            baseSpeed -= thrustAcceleration * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || externalBoost)
         {
 
             if (!isBoosting)
@@ -153,10 +158,17 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                currentSpeed += thrustAcceleration * Time.deltaTime;
+                if (baseSpeed < maxForwardSpeed)
+                    baseSpeed += thrustAcceleration * Time.deltaTime;
+                else
+                    baseSpeed = maxForwardSpeed;
             }
-            additionalSpeed += boostAcceleration * Time.deltaTime;
-            additionalSpeed = Mathf.Clamp(additionalSpeed, 0, maxBoostSpeed);
+
+            if (additionalSpeed < maxBoostSpeed)
+                additionalSpeed += boostAcceleration * Time.deltaTime;
+            else if (!externalBoost)
+                additionalSpeed = Mathf.Lerp(additionalSpeed, maxBoostSpeed, Time.deltaTime);
+
             if (playerCamera.fieldOfView < boostedFOV)
             {
                 System.Random random = new System.Random();
@@ -168,12 +180,9 @@ public class PlayerController : MonoBehaviour
         } 
         else
         {
-
             if (isBoosting)
-            {
                 isBoosting = false;
                 
-            }
             additionalSpeed = Mathf.Lerp(additionalSpeed, 0, Time.deltaTime);
             if (playerCamera.fieldOfView > normalFOV)
             {
@@ -184,13 +193,13 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.fieldOfView = Mathf.Clamp(playerCamera.fieldOfView, normalFOV, boostedFOV);
 
-        currentSpeed = Mathf.Clamp(currentSpeed, maxReverseSpeed, maxForwardSpeed + additionalSpeed);
+        currentSpeed = Mathf.Clamp(baseSpeed + additionalSpeed, maxReverseSpeed, baseSpeed + additionalSpeed);
 
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
         speedLable.text = "Speed (MPH): " + currentSpeed.ToString("F2");
     }
-    // Adds slight delay to camera increasing and decreasing
+
     IEnumerator ChangeFOV(bool increaseFOV)
     {
         yield return new WaitForSeconds(0.1f);
@@ -202,5 +211,23 @@ public class PlayerController : MonoBehaviour
         {
             playerCamera.fieldOfView -= Time.deltaTime * 20;
         }
+    }
+
+    public void ApplyExternalBoost()
+    {
+        StartCoroutine(ExternalBoostCoroutine());
+    }
+
+    private IEnumerator ExternalBoostCoroutine()
+    {
+        externalBoost = true;
+        maxBoostSpeed *= 5;
+        boostAcceleration *= 5;
+
+        yield return new WaitForSeconds(3f);
+
+        externalBoost = false;
+        maxBoostSpeed /= 5;
+        boostAcceleration /= 5;
     }
 }

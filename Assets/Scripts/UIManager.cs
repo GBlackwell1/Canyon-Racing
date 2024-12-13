@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,12 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject OverlayPanel;
     public GameObject Countdown;
-
-    private GameObject CheckpointArrow;
-
-    private GameObject GameplayMenu;
-
-    private GameObject Gameplay;
+    public GameObject Gameplay;
     private Vector2 originalPausePosition;
     private Vector2 offScreenPausePosition;
     private Coroutine countdownCoroutine;
@@ -23,11 +19,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        GameplayMenu = transform.Find("Gameplay").gameObject;
-        Gameplay = GameplayMenu.transform.Find("control1").gameObject;
-        CheckpointArrow = transform.Find("CheckpointArrow").gameObject;
-
         var transformRect = PauseMenu.GetComponent<RectTransform>();
         originalPausePosition = new Vector2(transformRect.anchoredPosition.x, transformRect.anchoredPosition.y);
         offScreenPausePosition = new Vector2(transformRect.anchoredPosition.x - transformRect.rect.width, transformRect.anchoredPosition.y);
@@ -57,12 +48,18 @@ public class UIManager : MonoBehaviour
 
     public void StopWarning()
     {
-        //StopCoroutine(warningCoroutine);
+        if (warningCoroutine!= null)
+            StopCoroutine(warningCoroutine);
         Countdown.SetActive(false);
     }
 
     public void GoToGameplay(){
         Gameplay.SetActive(true);
+        foreach (Transform child in Gameplay.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        Gameplay.transform.Find("Gameplay - Controls 1").gameObject.SetActive(true);
     }
 
     public void RestartLevel()
@@ -80,7 +77,6 @@ public class UIManager : MonoBehaviour
         PauseMenu.SetActive(true);
         OverlayPanel.SetActive(false);
         Countdown.SetActive(false);
-        CheckpointArrow.SetActive(false);
         var transform = PauseMenu.GetComponent<RectTransform>();
         float t = 0f;
         float multiplier = 1 / PauseDuration;
@@ -106,7 +102,6 @@ public class UIManager : MonoBehaviour
 
         PauseMenu.SetActive(false);
         OverlayPanel.SetActive(true);
-        CheckpointArrow.SetActive(true);
     }
 
     private IEnumerator ExecuteCountdown(int length, bool warning)
@@ -120,6 +115,8 @@ public class UIManager : MonoBehaviour
             text.text = result;
             yield return warning ? new WaitForSeconds(1) : new WaitForSecondsRealtime(1);
         }
+        if (SceneManager.GetActiveScene().name == "Level 4" && !warning )
+            GameObject.Find("Info")?.SetActive(false);
         Countdown.SetActive(false);
         OverlayPanel.SetActive(true);
     }

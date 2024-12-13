@@ -13,7 +13,7 @@ public class CheckpointManager : MonoBehaviour
     private GameObject finishLine;
     private List<GameObject> checkpoints = new List<GameObject>();
     private int checkpointCount = 0;
-
+    
     //checkpoint arrow
     private Vector3 targetPosition;
     private Vector3 checkpointPosition;
@@ -22,6 +22,7 @@ public class CheckpointManager : MonoBehaviour
     public GameObject Spaceship;
 
     public AudioClip checkpointPass;
+    public AudioClip FinishClip;
     public GameObject checkpointLabel;
     private TextMeshProUGUI checkpointLabelTMP;
     private float time = 0f;
@@ -80,12 +81,17 @@ public class CheckpointManager : MonoBehaviour
             other.SetActive(false);
             checkpoints.Remove(other);
             if (checkpoints.Count > 0)
+            {
                 checkpoints[0].SetActive(true);
-            else{
+                GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass, 4);
+            }
+            else
+            {
                 finishActive = true;
+                GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(FinishClip, 4);
                 CheckpointArrow.SetActive(false);
             }
-            GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass, 4);
+           
             checkpointLabelTMP.SetText("Checkpoints remaining: " + checkpoints.Count + "/" + checkpointCount);
 
         }
@@ -93,7 +99,6 @@ public class CheckpointManager : MonoBehaviour
         {
             GameManager.Instance.SaveLevelData(SceneManager.GetActiveScene().name, time);
             GameManager.Instance.GoToLevel(0);
-            GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass);
         }
     }
 }

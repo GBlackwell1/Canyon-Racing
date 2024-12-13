@@ -235,6 +235,7 @@ MonoBehaviour:
   CheckpointArrow: {fileID: 279013149}
   Spaceship: {fileID: 1860544340}
   checkpointPass: {fileID: 8300000, guid: df84ce25cc3e4334dbef4a4e0ea38408, type: 3}
+  FinishClip: {fileID: 8300000, guid: 7e3fb6f294d126a449b5c7c9044c6e4c, type: 3}
   checkpointLabel: {fileID: 4610920203165139536}
 --- !u!1 &171846260
 GameObject:

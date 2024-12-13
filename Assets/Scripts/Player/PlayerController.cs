@@ -122,9 +122,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Rotate(currentPitchSpeed * Time.deltaTime, currentYawSpeed * Time.deltaTime, currentRollSpeed * Time.deltaTime);
-        // TODO: Confine this in some manner
-        
-       
     }
 
     void HandleThrust()
@@ -197,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
-        speedLable.text = "Speed: " + currentSpeed.ToString("F2");
+        speedLable.text = "Speed (MPH): " + currentSpeed.ToString("F2");
     }
 
     IEnumerator ChangeFOV(bool increaseFOV)

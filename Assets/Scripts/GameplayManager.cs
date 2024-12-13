@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
-    private GameObject Control1;
-
-    private GameObject Control2;
-    private GameObject Rules;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Control1 = transform.Find("control1").gameObject;
-        Control2 = transform.Find("control2").gameObject;
-        Rules = transform.Find("rules").gameObject;
-    }
+    public GameObject Control1;
+    public GameObject Control2;
+    public GameObject Rules;
 
     public void CloseGameplay(){
-        Control1.SetActive(false);
-        Control2.SetActive(false);
-        Rules.SetActive(false);
+        foreach (Transform child in gameObject.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        gameObject.SetActive(false);
     } 
 
     public void GoToControl1(){

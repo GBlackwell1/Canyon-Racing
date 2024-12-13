@@ -10,10 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject OverlayPanel;
     public GameObject Countdown;
-
-    private GameObject GameplayMenu;
-
-    private GameObject Gameplay;
+    public GameObject Gameplay;
     private Vector2 originalPausePosition;
     private Vector2 offScreenPausePosition;
     private Coroutine countdownCoroutine;
@@ -22,10 +19,6 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        GameplayMenu = transform.Find("Gameplay").gameObject;
-        Gameplay = GameplayMenu.transform.Find("control1").gameObject;
-
         var transformRect = PauseMenu.GetComponent<RectTransform>();
         originalPausePosition = new Vector2(transformRect.anchoredPosition.x, transformRect.anchoredPosition.y);
         offScreenPausePosition = new Vector2(transformRect.anchoredPosition.x - transformRect.rect.width, transformRect.anchoredPosition.y);
@@ -62,6 +55,11 @@ public class UIManager : MonoBehaviour
 
     public void GoToGameplay(){
         Gameplay.SetActive(true);
+        foreach (Transform child in Gameplay.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        Gameplay.transform.Find("Gameplay - Controls 1").gameObject.SetActive(true);
     }
 
     public void RestartLevel()

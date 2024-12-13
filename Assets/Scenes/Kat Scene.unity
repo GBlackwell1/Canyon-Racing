@@ -558,6 +558,11 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &170751527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4320366375615389223, guid: 19ef9add49c31984a9954aec63d1d0f7, type: 3}
+  m_PrefabInstance: {fileID: 170751524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &255430507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1254,7 +1259,7 @@ PrefabInstance:
     - target: {fileID: 2321348557205033782, guid: c2f71fe2d72c62b4d9ac0a9efffff856, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 170751527}
     - target: {fileID: 3013436424337370362, guid: c2f71fe2d72c62b4d9ac0a9efffff856, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -1639,6 +1644,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 755955309}
   m_SourcePrefab: {fileID: 100100000, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+--- !u!1 &755955307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7130319613450709202, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
+  m_PrefabInstance: {fileID: 755955306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &755955308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1449880304956192392, guid: 50da6147161aebc4298a52c3ccd6c717, type: 3}
@@ -2520,6 +2530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0900a8ecd6d074428e0f05dc6c73bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckpointArrow: {fileID: 755955307}
+  Spaceship: {fileID: 170751527}
   checkpointPass: {fileID: 8300000, guid: df84ce25cc3e4334dbef4a4e0ea38408, type: 3}
   checkpointLabel: {fileID: 807424069}
 --- !u!1 &1606326241

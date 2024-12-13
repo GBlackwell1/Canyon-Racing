@@ -54,16 +54,12 @@ public class CheckpointManager : MonoBehaviour
         //logic for arrow pointing
         if (checkpoints.Count > 0){
             targetPosition = checkpoints[0].transform.position;
-            Vector3 toPosition = Camera.main.WorldToScreenPoint(targetPosition);
-            toPosition.z = 0f;
-            Vector3 fromPosition = Camera.main.WorldToScreenPoint(Spaceship.transform.position);
-            fromPosition.z = 0f;
-            Vector3 dir = (toPosition - fromPosition).normalized;
-            dir = dir.normalized;
-            float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            float angle =  n < 0 ? n + 360 : n;
-            
-            pointerRectTransform.localEulerAngles = new Vector3(0,0,angle);
+            Vector3 playerForward = Spaceship.transform.forward;
+            Vector3 toPosition = (targetPosition - Spaceship.transform.position).normalized;
+            playerForward.y = 0; toPosition.y = 0;
+ 
+            float angle = Vector3.SignedAngle(playerForward, toPosition, Vector3.up);           
+            pointerRectTransform.eulerAngles = new Vector3(0, 0, -angle+40);
         }
         if (finishActive && !finishLine.activeInHierarchy)
         {

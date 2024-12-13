@@ -53,7 +53,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (checkpoints.Contains(other))
         {
-            other.SetActive(false);
+            StartCoroutine(DisableCheckpoint(other));
             checkpoints.Remove(other);
             if (checkpoints.Count > 0)
                 checkpoints[0].SetActive(true);
@@ -69,5 +69,11 @@ public class CheckpointManager : MonoBehaviour
             GameManager.Instance.GoToLevel(0);
             GameObject.Find("Spaceship").GetComponent<AudioSource>().PlayOneShot(checkpointPass);
         }
+    }
+
+    private IEnumerator DisableCheckpoint(GameObject checkpoint)
+    {
+        yield return new WaitForSeconds(0.25f);
+        checkpoint.SetActive(false);
     }
 }

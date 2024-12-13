@@ -213,18 +213,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ApplyExternalBoost()
+    public void ApplyExternalBoost(float duration)
     {
-        StartCoroutine(ExternalBoostCoroutine());
+        StartCoroutine(ExternalBoostCoroutine(duration));
     }
 
-    private IEnumerator ExternalBoostCoroutine()
+    private IEnumerator ExternalBoostCoroutine(float duration)
     {
         externalBoost = true;
         maxBoostSpeed *= 5;
         boostAcceleration *= 5;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(duration);
 
         externalBoost = false;
         maxBoostSpeed /= 5;

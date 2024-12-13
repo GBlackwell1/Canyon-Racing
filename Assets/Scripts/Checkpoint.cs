@@ -11,14 +11,13 @@ public class Checkpoint : MonoBehaviour
         checkpointManager = GetComponentInParent<CheckpointManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && other.GetType() == typeof(BoxCollider))
+        {
             checkpointManager.ColliderEvent(gameObject);
+            var animator = transform.Find("Model").gameObject.GetComponent<Animator>();
+            animator.SetBool("Completed", true);
+        }  
     }
 }

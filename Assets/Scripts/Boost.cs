@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boost : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float boostDuration = 2f;
     void Start()
     {
         
@@ -21,7 +21,7 @@ public class Boost : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Increase the player's speed
-            other.GetComponent<PlayerController>().ApplyExternalBoost();
+            other.GetComponent<PlayerController>().ApplyExternalBoost(boostDuration);
             gameObject.SetActive(false);
         }
     }

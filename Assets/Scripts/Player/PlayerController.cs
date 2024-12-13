@@ -122,9 +122,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.Rotate(currentPitchSpeed * Time.deltaTime, currentYawSpeed * Time.deltaTime, currentRollSpeed * Time.deltaTime);
-        // TODO: Confine this in some manner
-        
-       
     }
 
     void HandleThrust()

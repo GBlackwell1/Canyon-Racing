@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
   player: {fileID: 0}
+  DestroyClip: {fileID: 8300000, guid: 920c2fcf57896b94da5c1ec5566a24c0, type: 3}

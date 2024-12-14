@@ -139,7 +139,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            baseSpeed -= thrustAcceleration * Time.deltaTime;
+            if (baseSpeed > maxReverseSpeed)
+                baseSpeed -= thrustAcceleration * Time.deltaTime;
+            else 
+                baseSpeed = maxReverseSpeed;
         }
 
         if (Input.GetKey(KeyCode.LeftShift) || externalBoost)
